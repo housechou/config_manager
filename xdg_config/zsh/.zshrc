@@ -9,7 +9,7 @@ export ZSH="$XDG_DATA_HOME"/oh-my-zsh
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="ys"
+#ZSH_THEME="ys"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -73,7 +73,13 @@ plugins=(git zsh-autosuggestions command-not-found)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=006, bg=cyan,bold,underline"
 source $ZSH/oh-my-zsh.sh
 # bindkey should be placed after source $ZSH/oh-my-zsh.sh
-bindkey '^k' autosuggest-accept
+bindkey ',' autosuggest-accept
+
+# Starship 
+eval "$(starship init zsh)"
+# set Starship PATH
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+
 
 # User configuration
 extract () {
@@ -120,8 +126,12 @@ export LESS=ixFR
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias fd=fdfind
-alias ls="ls -a --color=auto"
-alias ll="ls -alh --color=auto"
+if ! type eza >/dev/null 2>&1; then
+    alias ls="ls -a --color=auto"
+else
+    alias ls="eza -g -a --icons"
+fi
+alias ll="ls -l"
 alias vi="nvim"
 export EDITOR='vi'
 setopt no_share_history
@@ -136,3 +146,5 @@ source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
