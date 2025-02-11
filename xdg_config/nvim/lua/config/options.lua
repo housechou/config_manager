@@ -17,7 +17,7 @@ vim.opt.listchars = {
   nbsp = "␣",
 }
 
-vim.opt.clipboard = unnamedplus
+vim.opt.clipboard = nil
 
 function unnamed_paste(reg)
   return function(lines)
@@ -27,8 +27,7 @@ function unnamed_paste(reg)
 end
 
 vim.g.clipboard = {
-  -- name = "dummy clipboard",
-  name = "OSC 52",
+  name = "dummy clipboard",
   copy = {
     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),

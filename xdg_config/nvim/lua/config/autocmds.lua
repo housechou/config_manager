@@ -7,9 +7,10 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "c" },
   callback = function()
     vim.b.autoformat = false
-    vim.o.shiftwidth = 8
-    vim.o.tabstop = 8
-    vim.o.softtabstop = 8
+    vim.api.nvim_set_hl(0, "@lsp.type.comment.c", {})
+    -- vim.o.shiftwidth = 8
+    -- vim.o.tabstop = 8
+    -- vim.o.softtabstop = 8
   end,
 })
 
